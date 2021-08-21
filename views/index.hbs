@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Films</title>
+</head>
+<body>
+    <h1>Фильмы на которые мы идём</h1>
+
+{{#each movies}}
+
+    <div class="card mb-3">
+        <h5 class="card-header">{{ this.title }}</h5>
+    </div>
+    
+{{/each}}
+
+<a href="/add-film">Добавить фильм</a>
+
+</body>
+</html>
