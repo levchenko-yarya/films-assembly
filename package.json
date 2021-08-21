@@ -1,0 +1,23 @@
+{
+  "name": "films-assembly",
+  "version": "1.0.0",
+  "description": "app for keeping track of the released movies",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/levchenko-yarya/films-assembly.git"
+  },
+  "author": "levchenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/levchenko-yarya/films-assembly/issues"
+  },
+  "homepage": "https://github.com/levchenko-yarya/films-assembly#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
