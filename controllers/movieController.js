@@ -34,11 +34,13 @@ exports.add = (req, res) => {
 exports.post = (req, res) => {
     
     const movie = new Movie({
-        title: req.body.title
+        title: req.body.title,
+        description: req.body.description,
+        url: req.body.url,
+        date: req.body.date
     })
 
-    movie.save(function(err){
-        if(err) return console.log(err)
-        res.redirect('/')
-    })
+    movie.save()
+
+    res.redirect('/')
 }
