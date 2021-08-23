@@ -1,0 +1,19 @@
+version: '3'
+services:
+  app:
+    container_name: app
+    restart: always
+    build: .
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - '127.0.0.1:81:3000'
+    depends_on: 
+      - mongo
+    external_links:
+      - mongo
+  mongo:
+    container_name: mongodb
+    image: mongo
+    ports:
+      - '127.0.0.1:27017:27017'
