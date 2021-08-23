@@ -1,5 +1,5 @@
 const express = require('express')
-const controller = require('../controllers/movieController')
+const controller = require('./controller')
 const router = express.Router()
 
 router.use('/post', controller.post)

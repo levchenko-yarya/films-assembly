@@ -1,4 +1,4 @@
-const Movie = require('../models/movie')
+const Movie = require('../movie/model')
 
 exports.show = (req, res) => {
     Movie.find({}, (err, movies) => {
@@ -10,7 +10,7 @@ exports.show = (req, res) => {
 }
 
 exports.post = (req, res) => {
-    
+
     const movie = new Movie({
         title: req.body.title
     })

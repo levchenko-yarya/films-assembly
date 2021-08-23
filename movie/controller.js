@@ -1,4 +1,4 @@
-const Movie = require('../models/movie')
+const Movie = require('./model')
 
 exports.show = (req, res) => {
     Movie.find({}, (err, allMovies) => {
@@ -32,12 +32,12 @@ exports.add = (req, res) => {
 }
 
 exports.post = (req, res) => {
-    
+
     const movie = new Movie({
         title: req.body.title,
         description: req.body.description,
         url: req.body.url,
-        date: req.body.date
+        date: req.body.date.toString('dd.MM.yyyy')
     })
 
     movie.save()
