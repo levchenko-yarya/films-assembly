@@ -11,7 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./
+      - uses: actions/checkout@master
       - name: Build app image
         run: |
           docker-compose build
@@ -21,6 +21,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
       - name: Copy compose file
       - uses: ./
         with:
