@@ -28,6 +28,6 @@ jobs:
 
       - name: Copy compose file
         run: |
-          mkdir ~/.ssh && echo ${{ secrets.KEY }} > ~/.ssh/id_rsa.pub
+          mkdir ~/.ssh && echo ${{ secrets.KEY }} > ~/.ssh/deploy.pub && chmod 600 ~/.ssh/deploy.pub
           scp -o StrictHostKeyChecking=no ./docker-compose.deploy.yml ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/opt/film-assembly/docker-compose.deploy.yml
           ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} "cd /opt && docker-compose -f docker-compose.deploy.yml up -d"
