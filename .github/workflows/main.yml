@@ -11,18 +11,32 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: ./
       - name: Build app image
         run: |
           docker-compose build
           docker tag films-assembly_app:latest den255/film-assembly:latest
-          docker login --help -u user -p password
+          docker login --help -u ${{DOCKERHUB_USER}} -p ${{DOCKERHUB_PASSWORD}}
           docker push den255/film-assembly:latest
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Copy compose file
+      - uses: ./
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: 22
+          source: "docker-compose.deploy.yml"
+          target: "/opt/film-assembly/docker-compose.deploy.yml"
       - name: Deploy app
-        run: |
-          scp docker-compose.deploy.yml user@ip:/opt/film-assembly/
-          ssh user@ip 'cd /opt/film-assembly/ && docker-compose -f docker-compose.deploy.yml up -d'
+      - uses: ./
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: 22
+          script: |
+            cd /opt/film-assembly/
+            docker-compose -f docker-compose.deploy.yml up -d
