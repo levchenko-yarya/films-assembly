@@ -27,22 +27,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Copy compose file
-        uses: ./
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          port: 22
-          source: "docker-compose.deploy.yml"
-          target: "/opt/film-assembly/docker-compose.deploy.yml"
-
-      - name: Deploy app
-        uses: ./
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          port: 22
-          script: |
-            cd /opt/film-assembly/
-            docker-compose -f docker-compose.deploy.yml up -d
+        run: |
+          cat${{ secrets.KEY }} >> ~/.ssh/id_rsa.pub
+          scp ${{ secrets.USERNAME }}@${{ secrets.HOST }} ./docker-compose.deploy.yml:/opt/film-assembly/docker-compose.deploy.yml
+          ssh  ${{ secrets.USERNAME }}@${{ secrets.HOST }} "cd /opt/film-assembly/ && docker-compose -f docker-compose.deploy.yml up -d"
