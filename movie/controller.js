@@ -67,8 +67,7 @@ exports.edit = (req, res) => {
     })
 }
 
-// обновить инфу по фильму
-exports.update = (req, res) => {
+/*exports.update = (req, res) => {
     return Movie.findByIdAndUpdate({_id: req.params.id}, {
             title: req.body.title,
             description: req.body.description,
@@ -89,22 +88,30 @@ exports.update = (req, res) => {
                 }
             })
         })
+}*/
+
+// обновить инфу по фильму
+exports.update = (req, res, next) => {
+    if (!req.params.id) return next(new Error('no Movie id!'))
+    Movie.findByIdAndUpdate(
+        req.params.id,
+        {$set: req.body.title},
+        (error, doc) => {
+            if (error) return next(error)
+            res.send(doc)
+        }
+    )
 }
 
 // удалить фильм по id
-exports.delete = (req, res) => {
-    return Movie.findById(req.params.id, (err, movie) => {
-        if (!movie) {
-            res.statusCode = 404
-            return res.send({error: 'Not found'})
-        }
-        return movie.remove((err) => {
-            if (!err) {
-                return res.send({status: 'OK'})
-            } else {
-                res.statusCode = 500
-                return res.send({error: 'Server error'})
-            }
+exports.delete = (req, res, next) => {
+    if (!req.params.id) return next(new Error('no Movie id!'))
+    Movie.findById(req.params.id, (error, movie) => {
+        if (error) return next(error)
+        if (!movie) return next(new Error('Movie not found'))
+        movie.remove((error, doc) => {
+            if (error) return next(error)
+            res.redirect('/')
         })
     })
 }

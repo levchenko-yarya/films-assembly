@@ -12,17 +12,18 @@
 
 <h1>Фильм</h1>
 
-    <div class="card">
-        <div class="card mb-3">
-            <h3 class="card-header">{{ this.movie.title }}</h3>
-        </div>
-        <div class="card-body">
-            <p class="card-text">{{ this.movie.description }}</p>
-            <h5 class="card-title">{{ this.movie.date }}</h5>
-            <a href="{{ this.movie.url }}" class="btn btn-primary" target="_blank">ссылка на трейлер</a>
-        </div>
-        <a href="/edit/{{this.movie.id}}">редактировать</a>
+<div class="card">
+    <div class="card mb-3">
+        <h3 class="card-header">{{ this.movie.title }}</h3>
     </div>
+    <div class="card-body">
+        <p class="card-text">{{ this.movie.description }}</p>
+        <h5 class="card-title">{{ this.movie.date }}</h5>
+        <a href="{{ this.movie.url }}" class="btn btn-primary" target="_blank">ссылка на трейлер</a>
+    </div>
+    <a href="/update/{{this.movie.id}}">редактировать</a>
+    <a href="/delete/{{this.movie.id}}">удалить</a>
+</div>
 
 </body>
 </html>
