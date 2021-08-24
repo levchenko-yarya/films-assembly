@@ -29,5 +29,5 @@ jobs:
       - name: Copy compose file
         run: |
           mkdir ~/.ssh && echo ${{ secrets.KEY }} > ~/.ssh/id_rsa.pub
-          scp ${{ secrets.USERNAME }}@${{ secrets.HOST }} ./docker-compose.deploy.yml:/opt/film-assembly/docker-compose.deploy.yml
-          ssh  ${{ secrets.USERNAME }}@${{ secrets.HOST }} "cd /opt/film-assembly/ && docker-compose -f docker-compose.deploy.yml up -d"
+          scp ${{ secrets.USERNAME }}@${{ secrets.HOST }} ./docker-compose.deploy.yml:/opt/docker-compose.deploy.yml
+          ssh  ${{ secrets.USERNAME }}@${{ secrets.HOST }} "cd /opt && docker-compose -f docker-compose.deploy.yml up -d"
