@@ -11,7 +11,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - name: checkout
+      - uses: actions/checkout@v2
+
       - name: Build app image
         run: |
           docker-compose build
@@ -21,7 +23,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - name: checkout
+      - uses: actions/checkout@v2
+
       - name: Copy compose file
       - uses: ./
         with:
@@ -31,6 +35,7 @@ jobs:
           port: 22
           source: "docker-compose.deploy.yml"
           target: "/opt/film-assembly/docker-compose.deploy.yml"
+
       - name: Deploy app
       - uses: ./
         with:
