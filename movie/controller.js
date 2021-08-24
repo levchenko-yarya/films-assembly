@@ -41,6 +41,7 @@ exports.store = (req, res) => {
     const movie = new Movie({
         title: req.body.title,
         description: req.body.description,
+        poster: req.body.poster,
         url: req.body.url,
         date: req.body.date.toString('dd.MM.yyyy')
     })
