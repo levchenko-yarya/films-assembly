@@ -15,10 +15,13 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build app image
+        env:
+          DOCKERHUB_USER: ${{secrets.DOCKERHUB_USER}}
+          DOCKERHUB_PASSWORD: ${{secrets.DOCKERHUB_PASSWORD}}
         run: |
           docker-compose build
           docker tag films-assembly_app:latest den255/film-assembly:latest
-          docker login --help -u "${{secrets.DOCKERHUB_USER}}" -p "${{secrets.DOCKERHUB_PASSWORD}}"
+          docker login --help -u "$DOCKERHUB_USER" -p "$DOCKERHUB_PASSWORD"
           docker push den255/film-assembly:latest
   deploy:
     runs-on: ubuntu-latest
