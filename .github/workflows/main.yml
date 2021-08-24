@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Build app image
         run: |
@@ -24,10 +24,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Copy compose file
-      - uses: ./
+        uses: ./
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
@@ -37,7 +37,7 @@ jobs:
           target: "/opt/film-assembly/docker-compose.deploy.yml"
 
       - name: Deploy app
-      - uses: ./
+        uses: ./
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
