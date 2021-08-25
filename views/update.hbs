@@ -16,7 +16,7 @@
 
     <h1>ИЗМЕНЕНИЕ ФИЛЬМА</h1>
 
-    <form action="update" method="put">
+    <form action="/update/{{this.id}}" method="post">
 
         <div class="form-group">
             <label for="content">Название фильма</label>
@@ -29,6 +29,11 @@
         </div>
 
         <div class="form-group">
+            <label for="content">Ссылка на постер фильма</label>
+            <input class="form-control" type="text" name="poster" value="{{ this.movie.poster }}">
+        </div>
+
+        <div class="form-group">
             <label for="content">Ссылка на трейлер фильма</label>
             <input class="form-control" type="text" name="url" value="{{ this.movie.url }}">
         </div>
@@ -38,6 +43,7 @@
             <input class="form-control" type="date" name="date" value="{{ this.movie.date }}">
         </div>
 
+        <input type="hidden" name="_method" value="PUT">
         <button type="submit" class="btn btn-primary">Изменить</button>
     </form>
 

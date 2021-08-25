@@ -10,9 +10,10 @@
 </head>
 <body>
 
-<h1>Фильм</h1>
-
-    <div class="card">
+<div class="container" style="width: 600px">
+    <h1>Фильм</h1>
+    <div class="card" style="width: 32rem;">
+        <img src="{{this.movie.poster}}" class="card-img-top" alt="poster">
         <div class="card mb-3">
             <h3 class="card-header">{{ this.movie.title }}</h3>
         </div>
@@ -21,8 +22,10 @@
             <h5 class="card-title">{{ this.movie.date }}</h5>
             <a href="{{ this.movie.url }}" class="btn btn-primary" target="_blank">ссылка на трейлер</a>
         </div>
-        <a href="/edit/{{this.movie.id}}">редактировать</a>
+        <a href="/update/{{this.movie.id}}">редактировать</a>
+        <a href="/delete/{{this.movie.id}}">удалить</a>
     </div>
+</div>
 
 </body>
 </html>
