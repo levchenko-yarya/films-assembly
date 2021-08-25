@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Build app image
         env:
@@ -20,31 +20,16 @@ jobs:
         run: |
           docker-compose build
           docker tag films-assembly_app:latest den255/film-assembly:latest
-          docker login --help -u user -p $DOCKERHUB_PASSWORD
+          docker login -u ${{secrets.DOCKERHUB_USER}} -p ${{secrets.DOCKERHUB_PASSWORD}}
           docker push den255/film-assembly:latest
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Copy compose file
-      - uses: ./
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          port: 22
-          source: "docker-compose.deploy.yml"
-          target: "/opt/film-assembly/docker-compose.deploy.yml"
-
-      - name: Deploy app
-      - uses: ./
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          port: 22
-          script: |
-            cd /opt/film-assembly/
-            docker-compose -f docker-compose.deploy.yml up -d
+        run: |
+          echo "${{ secrets.KEY }}" > deploy.pub && chmod 600 deploy.pub
+          scp -i deploy.pub -o StrictHostKeyChecking=no docker-compose.deploy.yml ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~/docker-compose.deploy.yml
+          ssh -i deploy.pub -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} "cd ~/ && docker-compose -f docker-compose.deploy.yml up -d"
