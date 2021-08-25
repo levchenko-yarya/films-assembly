@@ -8,3 +8,10 @@
 GET `/api/films` - получить все фильмы
 
 GET `/api/film/:id` - получить фильм по id
+
+POST `/api/film/post` - добавить новый фильм
+
+PUT `/api/film/:id/update` - изменить инфу фильма
+
+DELETE `/api/film/:id/delete` - удалить фильм по id
+
