@@ -31,4 +31,4 @@ jobs:
         run: |
           echo "${{ secrets.KEY }}" > deploy.pub && chmod 600 deploy.pub
           scp -i deploy.pub -o StrictHostKeyChecking=no docker-compose.deploy.yml ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~/docker-compose.deploy.yml
-          ssh -i deploy.pub -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} "cd ~/ && docker-compose -f docker-compose.deploy.yml up -d"
+          ssh -i deploy.pub -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} "cd ~/ && docker-compose -f docker-compose.deploy.yml pull && docker-compose -f docker-compose.deploy.yml up -d"
