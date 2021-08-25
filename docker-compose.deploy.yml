@@ -17,3 +17,7 @@ services:
     image: mongo
     ports:
       - '127.0.0.1:27017:27017'
+  front-app:
+    image: den255/film-front:latest
+    ports:
+      - '127.0.0.1:88:80'
