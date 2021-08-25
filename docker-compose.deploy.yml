@@ -4,6 +4,8 @@ services:
     container_name: app
     restart: always
     image: den255/film-assembly:latest
+    volumes:
+      - .env:/usr/src/app/.env
     ports:
       - '127.0.0.1:81:3000'
     depends_on: 
