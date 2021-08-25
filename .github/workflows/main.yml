@@ -29,6 +29,5 @@ jobs:
       - name: Copy compose file
         run: |
           echo "${{ secrets.KEY }}" > deploy.pub && chmod 600 deploy.pub
-          ls
-          scp -i deploy.pub -o StrictHostKeyChecking=no ./docker-compose.deploy.yml ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/opt/docker-compose.deploy.yml
-          ssh -i deploy.pub -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} "cd /opt && docker-compose -f docker-compose.deploy.yml up -d"
+          scp -i deploy.pub -o StrictHostKeyChecking=no docker-compose.deploy.yml ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~/docker-compose.deploy.yml
+          ssh -i deploy.pub -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} "cd ~/ && docker-compose -f docker-compose.deploy.yml up -d"
