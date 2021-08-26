@@ -12,6 +12,7 @@ services:
       - mongo
     external_links:
       - mongo
+    command: ["/bin/sh","-c","npm install && npm start"]
   mongo:
     container_name: mongodb
     image: mongo
