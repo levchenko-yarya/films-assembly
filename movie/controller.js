@@ -43,7 +43,7 @@ exports.store = (req, res) => {
         description: req.body.description,
         poster: req.body.poster,
         url: req.body.url,
-        datetime: req.body.date
+        datetime: req.body.datetime
     })
     movie.save()
     res.redirect('/')
