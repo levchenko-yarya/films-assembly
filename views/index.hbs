@@ -15,24 +15,12 @@
 
 {{#each movies}}
 
-    <!--<div class="card">
-        <div class="card mb-3">
-            <h3 class="card-header"><a href="/film/{{this.id}}">{{ this.title }}</a></h3>
-        </div>
-        <div class="card-body">
-            <p class="card-text">{{ this.description }}</p>
-            <h5 class="card-title">{{ this.date }}</h5>
-            <a href="{{ this.url }}" class="btn btn-primary" target="_blank">ссылка на трейлер</a>
-        </div>
-        <a href="/update/{{this.id}}">редактировать</a>
-    </div>-->
-
     <div class="card" style="width: 28rem;">
         <img src="{{this.poster}}" class="card-img-top" alt="poster">
         <div class="card-body">
             <h5 class="card-title"><a href="/film/{{this.id}}">{{ this.title }}</a></h5>
             <p class="card-text">{{ this.description }}</p>
-            <h5 class="card-text">{{ this.date }}</h5>
+            <h5 class="card-text">{{ this.datetime }}</h5>
             <a href="{{ this.url }}" class="btn btn-primary" target="_blank">ссылка на трейлер</a>
         </div>
     </div>
