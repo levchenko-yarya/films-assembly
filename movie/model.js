@@ -14,7 +14,7 @@ const movieSchema = new Schema({
     url: {
         type: String
     },
-    date: {
+    datetime: {
         type: String
     }
 })
