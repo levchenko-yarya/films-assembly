@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 // Add headers before the routes are defined
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', '*.films-assembly.pp.ua');
+    res.setHeader('Access-Control-Allow-Origin', '*.'+process.env.APP_DOMAIN);
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     // Request headers you wish to allow
