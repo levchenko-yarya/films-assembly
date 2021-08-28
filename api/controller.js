@@ -1,11 +1,24 @@
 const Movie = require('../movie/model')
 
 // показать все фильмы
-exports.show = (req, res) => {
-    Movie.find({}, (err, movies) => {
-        if (err) return res.status(400)
-        return res.send(movies)
-    })
+exports.show = async (req, res) => {
+    const movies = await Movie
+        .find({})
+        .sort({
+            datetime: 1
+        })
+    return res.send(movies)
+}
+
+// показать ближайшие 5 фильмов
+exports.coming = async (req, res) => {
+    const movies = await Movie
+        .find({})
+        .sort({
+            datetime: 1
+        })
+        .limit(2)
+    return res.send(movies)
 }
 
 // показать фильм по id
