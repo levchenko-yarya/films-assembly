@@ -70,12 +70,11 @@ exports.edit = (req, res) => {
 
 //! error - no update
 // обновить инфу по фильму
-exports.update = (req, res, next) => {
+exports.update = (req, res) => {
     Movie.findByIdAndUpdate(
         req.params.id,
         {$set: req.body},
-        (error, movie) => {
-            if (error) return next(error)
+        () => {
             res.redirect('/')
         }
     )
