@@ -30,7 +30,8 @@ app.use('/', movieRouter)
 
 mongoose.connect(process.env.MONGODB_URI, {
     useUnifiedTopology: true,
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useFindAndModify: false
 }, (err) => {
     if (err) return console.log(err)
     app.listen(process.env.PORT)
