@@ -12,6 +12,7 @@
             display: flex;
             flex-wrap: wrap;
         }
+
         .movie {
             margin: 25px auto;
             width: 500px;
@@ -26,7 +27,9 @@
 <div class="movies">
     {{#each movies}}
         <div class="card movie" style="width: 28rem;">
-            <img src="{{this.poster}}" class="card-img-top" alt="poster">
+            {{#if this.poster}}
+                <img src="{{this.poster}}" class="card-img-top" alt="poster">
+            {{/if}}
             <div class="card-body">
                 <h5 class="card-title"><a href="/film/{{this.id}}">{{ this.title }}</a></h5>
                 <p class="card-text">{{ this.description }}</p>
