@@ -19,6 +19,14 @@ exports.show = async (req, res) => {
     })
 }
 
+// показать просмотренные фильмы
+exports.watched = async (req, res) => {
+    const movies = await Movie.find({}).sort({datetime: 1})
+    res.render('watched.hbs', {
+        movies: movies
+    })
+}
+
 // показать фильм по id
 exports.get = (req, res) => {
     Movie.findById(req.params.id, (err, movie) => {
