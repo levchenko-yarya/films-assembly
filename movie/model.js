@@ -15,7 +15,7 @@ const movieSchema = new Schema({
         type: String
     },
     datetime: {
-        type: String
+        type: Date
     }
 })
 

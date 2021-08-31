@@ -19,13 +19,15 @@
         }
     </style>
 </head>
-<body class="container">
+<body class="container" style="border: 1px solid blue">
+<div style="border: 1px solid gold">
+    <h1>Фильмы на которые мы идём</h1>
+    <a href="/add-film">Добавить фильм</a>
+</div>
 
-<h1>Фильмы на которые мы идём</h1>
-<a href="/add-film">Добавить фильм</a>
-
-<div class="movies">
-    {{#each movies}}
+<div class="new" style="width: 50%; float: left; border: 1px solid red">
+    <p style="border: 1px solid black; text-align: center">новые фильмы:</p>
+    {{#each newMovies}}
         <div class="card movie" style="width: 28rem;">
             {{#if this.poster}}
                 <img src="{{this.poster}}" class="card-img-top" alt="poster">
@@ -39,6 +41,40 @@
         </div>
     {{/each}}
 </div>
+
+<div class="old" style="width: 50%; margin-left: 50%; border: 1px solid red">
+    <p style="border: 1px solid black; text-align: center">просмотренные фильмы:</p>
+    {{#each oldMovies}}
+        <div class="card movie" style="width: 28rem;">
+            {{#if this.poster}}
+                <img src="{{this.poster}}" class="card-img-top" alt="poster">
+            {{/if}}
+            <div class="card-body">
+                <h5 class="card-title"><a href="/film/{{this.id}}">{{ this.title }}</a></h5>
+                <p class="card-text">{{ this.description }}</p>
+                <h5 class="card-text">{{ this.datetime }}</h5>
+                <a href="{{ this.url }}" class="btn btn-primary" target="_blank">ссылка на трейлер</a>
+            </div>
+        </div>
+    {{/each}}
+</div>
+
+
+<!--<div class="movies">-->
+        <!--    {{#each movies}}-->
+<!--        <div class="card movie" style="width: 28rem;">-->
+        <!--            {{#if this.poster}}-->
+<!--                <img src="{{this.poster}}" class="card-img-top" alt="poster">-->
+        <!--            {{/if}}-->
+<!--            <div class="card-body">-->
+<!--                <h5 class="card-title"><a href="/film/{{this.id}}">{{ this.title }}</a></h5>-->
+<!--                <p class="card-text">{{ this.description }}</p>-->
+<!--                <h5 class="card-text">{{ this.datetime }}</h5>-->
+<!--                <a href="{{ this.url }}" class="btn btn-primary" target="_blank">ссылка на трейлер</a>-->
+<!--            </div>-->
+<!--        </div>-->
+        <!--    {{/each}}-->
+<!--</div>-->
 
 </body>
 </html>

@@ -2,13 +2,20 @@ const Movie = require('./model')
 
 // показать все фильмы
 exports.show = async (req, res) => {
-    const movies = await Movie
-        .find({})
+    const newMovies = await Movie
+        .find({datetime: {$gte: Date.now()}})
         .sort({
             datetime: 1
         })
+    const oldMovies = await Movie
+        .find({datetime: {$lte: Date.now()}})
+        .sort({
+            datetime: -1
+        })
+
     res.render('index.hbs', {
-        movies: movies
+        newMovies: newMovies,
+        oldMovies: oldMovies
     })
 }
 
