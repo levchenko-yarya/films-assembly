@@ -20,7 +20,7 @@ exports.show = async (req, res) => {
 }
 
 // показать просмотренные фильмы
-exports.watched = async (req, res) => {
+exports.all = async (req, res) => {
     const movies = await Movie.find({}).sort({datetime: 1})
     res.render('watched.hbs', {
         movies: movies

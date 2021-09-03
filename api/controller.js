@@ -13,11 +13,11 @@ exports.show = async (req, res) => {
 // показать ближайшие 5 фильмов
 exports.coming = async (req, res) => {
     const movies = await Movie
-        .find({})
+        .find({datetime: {$gte: Date.now()}})
         .sort({
             datetime: 1
         })
-        .limit(2)
+        .limit(5)
     return res.send(movies)
 }
 
@@ -37,7 +37,7 @@ exports.store = (req, res) => {
         description: req.body.description,
         poster: req.body.poster,
         url: req.body.url,
-        date: req.body.date
+        datetime: req.body.datetime
     })
     movie.save()
     return res.send('movie is added')
