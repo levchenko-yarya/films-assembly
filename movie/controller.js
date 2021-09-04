@@ -1,16 +1,17 @@
 const Movie = require('./model')
+const moment = require('moment')
 
 // показать все фильмы
 exports.show = async (req, res) => {
     const newMovies = await Movie
-        .find({datetime: {$gte: Date.now()}})
+        .find({date: {$gte: Date.now()}})
         .sort({
-            datetime: 1
+            date: 1
         })
     const oldMovies = await Movie
-        .find({datetime: {$lte: Date.now()}})
+        .find({date: {$lte: Date.now()}})
         .sort({
-            datetime: -1
+            date: -1
         })
 
     res.render('index.hbs', {
@@ -21,7 +22,7 @@ exports.show = async (req, res) => {
 
 // показать все фильмы
 exports.all = async (req, res) => {
-    const movies = await Movie.find({}).sort({datetime: 1})
+    const movies = await Movie.find({}).sort({date: 1})
     res.render('watch.hbs', {
         movies: movies
     })
@@ -58,7 +59,8 @@ exports.store = (req, res) => {
         description: req.body.description,
         poster: req.body.poster,
         url: req.body.url,
-        datetime: req.body.datetime
+        date: req.body.datetime,
+        datetime: moment(req.body.datetime).locale('ru').format('DD MMMM YYYY')
     })
     movie.save()
     res.redirect('/')
@@ -83,12 +85,20 @@ exports.edit = (req, res) => {
     })
 }
 
-//! error - no update
+//! error - no update,
+// ??? datetime !!!
 // обновить инфу по фильму
 exports.update = (req, res) => {
     Movie.findByIdAndUpdate(
         req.params.id,
-        {$set: req.body},
+        {
+            title: req.body.title,
+            description: req.body.description,
+            poster: req.body.poster,
+            url: req.body.url,
+            date: req.body.datetime,
+            datetime: moment(req.body.datetime).locale('ru').format('DD MMMM YYYY')
+        },
         () => {
             res.redirect('/')
         }
