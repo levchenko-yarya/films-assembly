@@ -14,9 +14,7 @@
     <a href="/">на главную</a>
     <h1>Фильм</h1>
     <div class="card" style="width: 32rem;">
-        {{#if this.poster}}
             <img src="{{this.movie.poster}}" class="card-img-top" alt="poster">
-        {{/if}}
         <div class="card mb-3">
             <h3 class="card-header">{{ this.movie.title }}</h3>
         </div>
@@ -25,9 +23,10 @@
             <h5 class="card-title">{{ this.movie.datetime }}</h5>
             <a href="{{ this.movie.url }}" class="btn btn-primary" target="_blank">ссылка на трейлер</a>
         </div>
-        <a href="/update/{{this.movie.id}}">редактировать</a>
-        <a href="/delete/{{this.movie.id}}">удалить</a>
+
     </div>
+    <a href="/update/{{this.movie.id}}" class="btn btn-success">редактировать</a>
+    <a href="/delete/{{this.movie.id}}" class="btn btn-danger">удалить</a>
 </div>
 
 </body>

@@ -16,12 +16,12 @@
 </head>
 <body class="container" style="border: 1px solid blue">
 <div>
-    <h1>Фильмы на которые мы идём, либо <a href="/watched-films">посмотрели</a></h1>
-    <a href="/add-film">Добавить фильм</a>
+    <h1>Фильмы на которые мы идём, либо <a href="/all-films">все фильмы</a></h1>
+    <a href="/add-film" class="btn btn-outline-info">Добавить фильм</a>
 </div>
 
-<div class="new" style="width: 50%; float: left; border: 1px solid red">
-    <p style="border: 1px solid black; text-align: center">новые фильмы:</p>
+<div class="new" style="width: 50%; float: left">
+    <p style="text-align: center">новые фильмы:</p>
     {{#each newMovies}}
         <div class="card movie" style="width: 28rem;">
             {{#if this.poster}}
@@ -37,8 +37,8 @@
     {{/each}}
 </div>
 
-<div class="old" style="width: 50%; margin-left: 50%; border: 1px solid red">
-    <p style="border: 1px solid black; text-align: center">просмотренные фильмы:</p>
+<div class="old" style="width: 50%; margin-left: 50%">
+    <p style="text-align: center">просмотренные фильмы:</p>
     {{#each oldMovies}}
         <div class="card movie" style="width: 28rem;">
             {{#if this.poster}}
