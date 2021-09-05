@@ -6,7 +6,7 @@ exports.show = async (req, res) => {
     const movies = await Movie
         .find({})
         .sort({
-            date: 1
+            datetime: 1
         })
     return res.send(movies)
 }
@@ -14,9 +14,9 @@ exports.show = async (req, res) => {
 // показать ближайшие 5 фильмов
 exports.coming = async (req, res) => {
     const movies = await Movie
-        .find({date: {$gte: Date.now()}})
+        .find({datetime: {$gte: Date.now()}})
         .sort({
-            date: 1
+            datetime: 1
         })
         .limit(5)
     return res.send(movies)
@@ -38,8 +38,8 @@ exports.store = (req, res) => {
         description: req.body.description,
         poster: req.body.poster,
         url: req.body.url,
-        date: req.body.datetime,
-        datetime: moment(req.body.datetime).locale('ru').format('DD MMMM YYYY')
+        datetime: req.body.datetime,
+        date: moment(req.body.datetime).locale('ru').format('DD MMMM YYYY')
     })
     movie.save()
     return res.send('movie is added')
@@ -55,8 +55,8 @@ exports.update = (req, res, next) => {
             description: req.body.description,
             poster: req.body.poster,
             url: req.body.url,
-            date: req.body.datetime,
-            datetime: moment(req.body.datetime).locale('ru').format('DD MMMM YYYY')
+            datetime: req.body.datetime,
+            date: moment(req.body.datetime).locale('ru').format('DD MMMM YYYY')
         },
         (error, movie) => {
             if (error) return next(error)
