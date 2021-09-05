@@ -1,4 +1,5 @@
 const Movie = require('../movie/model')
+const moment = require('moment')
 
 // показать все фильмы
 exports.show = async (req, res) => {
@@ -37,7 +38,8 @@ exports.store = (req, res) => {
         description: req.body.description,
         poster: req.body.poster,
         url: req.body.url,
-        datetime: req.body.datetime
+        datetime: req.body.datetime,
+        date: moment(req.body.datetime).locale('ru').format('DD MMMM YYYY')
     })
     movie.save()
     return res.send('movie is added')
@@ -48,7 +50,14 @@ exports.update = (req, res, next) => {
     if (!req.params.id) return next(new Error('no Movie id!'))
     Movie.findByIdAndUpdate(
         req.params.id,
-        {$set: req.body},
+        {
+            title: req.body.title,
+            description: req.body.description,
+            poster: req.body.poster,
+            url: req.body.url,
+            datetime: req.body.datetime,
+            date: moment(req.body.datetime).locale('ru').format('DD MMMM YYYY')
+        },
         (error, movie) => {
             if (error) return next(error)
             return res.send('movie is updated')

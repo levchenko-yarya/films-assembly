@@ -4,14 +4,14 @@ const moment = require('moment')
 // показать все фильмы
 exports.show = async (req, res) => {
     const newMovies = await Movie
-        .find({date: {$gte: Date.now()}})
+        .find({datetime: {$gte: Date.now()}})
         .sort({
-            date: 1
+            datetime: 1
         })
     const oldMovies = await Movie
-        .find({date: {$lte: Date.now()}})
+        .find({datetime: {$lte: Date.now()}})
         .sort({
-            date: -1
+            datetime: -1
         })
 
     res.render('index.hbs', {
@@ -59,8 +59,8 @@ exports.store = (req, res) => {
         description: req.body.description,
         poster: req.body.poster,
         url: req.body.url,
-        date: req.body.datetime,
-        datetime: moment(req.body.datetime).locale('ru').format('DD MMMM YYYY')
+        datetime: req.body.datetime,
+        date: moment(req.body.datetime).locale('ru').format('DD MMMM YYYY')
     })
     movie.save()
     res.redirect('/')
@@ -96,8 +96,8 @@ exports.update = (req, res) => {
             description: req.body.description,
             poster: req.body.poster,
             url: req.body.url,
-            date: req.body.datetime,
-            datetime: moment(req.body.datetime).locale('ru').format('DD MMMM YYYY')
+            datetime: req.body.datetime,
+            date: moment(req.body.datetime).locale('ru').format('DD MMMM YYYY')
         },
         () => {
             res.redirect('/')
