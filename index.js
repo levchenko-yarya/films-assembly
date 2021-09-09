@@ -13,7 +13,7 @@ const apiRouter = require('./api/router')
 const app = express()
 
 app.set('view engine', 'hbs')
-//app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 // Add headers before the routes are defined
